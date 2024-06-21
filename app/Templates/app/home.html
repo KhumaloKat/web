@@ -1,0 +1,101 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block banner-slider %}
+<div class="container">
+    <th class="sale">
+        <a href="#" onclick="">
+            <img style="margin-top: 40px;" src="https://gifdb.com/images/high/sale-text-in-white-background-eektrfngddmsy1ac.gif" alt="..." height="400px" width="350px" />
+        </a>
+    </th>
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" style="margin-top: -400px; margin-left: 400px;">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://i.ytimg.com/vi/BFzryMZ0Z0E/maxresdefault.jpg" class="d-block w-100" alt="..." height="400px">
+            </div>
+            <div class="carousel-item">
+                <img src="https://cdn.24.co.za/files/Cms/General/d/440/e917572694a0430686d9f4d315ebc578.jpg" class="d-block w-100" alt="..." height="400px">
+            </div>
+            <div class="carousel-item">
+                <img src="https://netstorage-briefly.akamaized.net/images/ae70fae6c2e4b70c.png?imwidth=900" class="d-block w-100" alt="..." height="400px">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+{% endblock banner-slider %}
+
+{% block information %}
+<!-- <div class="container">
+    <div class="row text-center p-5 border-bottom">
+        <h1>Products</h1>
+        <small class="fs-5">
+            Welcome to SK Tailors, where tradition meets fashion in every stitch and weave. Nestled at the crossroads of heritage and style, we specialize in offering a curated collection of traditional garments that celebrate cultural richness and timeless elegance. From intricately embroidered saris to finely tailored kimonos, each piece in our range is a testament to craftsmanship and heritage passed down through generations.
+            Our passion for preserving tradition is matched only by our commitment to quality, ensuring that every garment embodies both authenticity and contemporary flair. Whether you're embracing your cultural roots or exploring new styles, SK Tailors is your destination for embracing tradition with a modern twist.
+        </small>
+    </div>
+</div> -->
+{% endblock information %}
+
+{% block main-content %}
+
+<div class="container">
+    <h2 class="text-center">Clothing Category</h2>
+</div>
+<br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 mb-4 mx-2">
+            <div class="card" style="width: 18rem; margin-top: 15px;">
+                <img src="{% static 'app/images/product/tshirt.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Tshirt">
+                <div class="card-body">
+                    <h5 class="card-title">Tshirt</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-4 mx-2">
+            <div class="card" style="width: 18rem; margin-top: 15px;">
+                <img src="{% static 'app/images/product/suits.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Suits">
+                <div class="card-body">
+                    <h5 class="card-title">Suits</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-4 mx-2">
+            <div class="card" style="width: 18rem; margin-top: 15px;">
+                <img src="{% static 'app/images/product/dress.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Dress">
+                <div class="card-body">
+                    <h5 class="card-title">Dress</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-4 mx-2">
+            <div class="card" style="width: 18rem; margin-top: 15px;">
+                <img src="{% static 'app/images/product/trousers.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Trousers">
+                <div class="card-body">
+                    <h5 class="card-title">Trousers</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 mb-4 mx-2">
+            <div class="card" style="width: 18rem; margin-top: 15px;">
+                <img src="{% static 'app/images/product/shoes.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Shoes">
+                <div class="card-body">
+                    <h5 class="card-title">Shoes</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</br></br></br>
+
+{% endblock main-content %}
