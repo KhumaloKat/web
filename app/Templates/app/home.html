@@ -46,7 +46,7 @@
 {% endblock information %}
 
 {% block main-content %}
-
+<br><br>
 <div class="container">
     <h2 class="text-center">Clothing Category</h2>
 </div>
@@ -54,45 +54,35 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-2 mb-4 mx-2">
-            <div class="card" style="width: 18rem; margin-top: 15px;">
-                <img src="{% static 'app/images/product/tshirt.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Tshirt">
+        <div class="col-auto" style="margin-right: 1cm;">
+            <a href="{% url 'category' 'MN'%}" >  
+            <div class="card" style="float: left; margin: 30px; width: 22rem;">
+                <img src="{% static 'app/images/men.jpg' %}" height="600px" width="400px" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Tshirt</h5>
+                    <h5 class="card-title">MEN</h5>
                 </div>
             </div>
+            </a>
         </div>
-        <div class="col-md-2 mb-4 mx-2">
+        <div class="col-auto" style="margin-right: 1cm; margin-top: 0.3cm;">
+            <a href="{% url 'category' 'KD'%}" >  
             <div class="card" style="width: 18rem; margin-top: 15px;">
-                <img src="{% static 'app/images/product/suits.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Suits">
+                <img src="{% static 'app/images/kids.png' %}" height="600px" width="400px" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Suits</h5>
+                    <h5 class="card-title">KIDS</h5>
                 </div>
             </div>
+            </a>
         </div>
-        <div class="col-md-2 mb-4 mx-2">
-            <div class="card" style="width: 18rem; margin-top: 15px;">
-                <img src="{% static 'app/images/product/dress.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Dress">
+        <div class="col-auto" style="margin-right: 1cm;">
+            <a href="{% url 'category' 'WM'%}">
+            <div class="card" style="float: left; margin: 30px; width: 22rem;">
+                <img src="{% static 'app/images/women.jpg' %}" height="600px" width="400px" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Dress</h5>
+                    <h5 class="card-title">WOMEN</h5>
                 </div>
             </div>
-        </div>
-        <div class="col-md-2 mb-4 mx-2">
-            <div class="card" style="width: 18rem; margin-top: 15px;">
-                <img src="{% static 'app/images/product/trousers.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Trousers">
-                <div class="card-body">
-                    <h5 class="card-title">Trousers</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-2 mb-4 mx-2">
-            <div class="card" style="width: 18rem; margin-top: 15px;">
-                <img src="{% static 'app/images/product/shoes.jpg' %}" height="300px" width="200px" class="card-img-top" alt="Shoes">
-                <div class="card-body">
-                    <h5 class="card-title">Shoes</h5>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
 </div>

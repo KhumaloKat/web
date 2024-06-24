@@ -5,29 +5,30 @@
 {% block main-content %}
 <div class="container my-5">
     <div class="row">
-        <div class="col-sm-3">
+        <!-- <div class="col-sm-3">
+            <div class="list-group">
             {% for val in title %}
-                <a href="#"class="list-group-item list-group-item-action" aria-current="true">
+                <a href="{% url 'category-title' val.title %}" class="list-group-item list-group-item-action" aria-current="true">
                     {{val.title}}
                 </a>
             {% endfor %}
-        </div>
-    </div>
-        <div class="col-sm-9">
+            </div>
+        </div> -->
+        <div class="container">
             <div class="row">
                 {% for prod in product %}
-                <div class="col text-center mb-4">
-                    <a href="{% url 'product-detail' prod.id %}" class="btn">
-                        <img src="{{prod.product_image.url}}" width="300px" height="200px" />
-                        <div class="fw.bold">{{prod.product}}</div>
-                        <div class="fw-bold">
-                            R{{prod.discount_price}}/-
-                            <small class="fw-light text-decoration-line-through">{{prod.selling_price}}</small>
+                <div class="col-auto" style="margin-right: 1cm;">
+                    <div class="card" style="width: 18rem; margin-top: 15px;">
+                        <a href="{% url 'product-detail' prod.id %}" class="btn">
+                        <img src="{{ prod.product_image.url }}" height="300px" width="200px" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ prod.title }}</h5>
+                        <p class="card-text">R{{ prod.selling_price }}</p>
+                        </a>    
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </div>  
                 {% endfor %}
-
             </div>
         </div>
     </div>
