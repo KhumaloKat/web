@@ -39,3 +39,12 @@ class Customer(models.Model):
     province = models.CharField(choices = PROVINCE_CHOICES,max_length=100)
     def __str__(self):
         return self.name
+    
+class Cart(models.Model):
+    user = models.ForeignKey(User,_delete = models.CASCADE)
+    product = models.ForeignKey(Product,_delete = models.CASCADE)
+    product = models.PositiveIntegerField(default = 1)
+
+    @property
+    def total_cost(self):
+        return self.quantity * self.produ
