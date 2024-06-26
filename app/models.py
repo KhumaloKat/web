@@ -41,10 +41,10 @@ class Customer(models.Model):
         return self.name
     
 class Cart(models.Model):
-    user = models.ForeignKey(User,_delete = models.CASCADE)
-    product = models.ForeignKey(Product,_delete = models.CASCADE)
-    product = models.PositiveIntegerField(default = 1)
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    product = models.ForeignKey(Product,on_delete = models.CASCADE)
+    quantity = models.PositiveIntegerField(default = 1)
 
-    @property
-    def total_cost(self):
-        return self.quantity * self.produ
+    # @property
+    # def total_cost(self):
+    #     return self.quantity * self.product.discount_price

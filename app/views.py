@@ -1,7 +1,7 @@
 from django.db.models import Count
 from django.shortcuts import render,redirect
 from django.views import View
-from . models import Product
+from . models import Product,Cart
 from . forms import Customer,CustomerRegistrationForm,CustomerProfileForm
 from django.contrib import messages
 
@@ -93,5 +93,29 @@ class updateAddress(View):
 
         return redirect("address")
     
-    def add_to_cart(request):
-        pass
+def add_to_cart(request):
+    user = request.user
+    product_id = request.GET.get('prod_id')
+
+    # Remove trailing slash if it exists
+    if product_id.endswith('/'):
+        product_id = product_id[:-1]
+
+    # Ensure the product_id is an integer
+    try:
+        product_id = int(product_id)
+    except ValueError:
+        messages.error(request, "Invalid product ID.")
+        return redirect("/")
+
+    product = Product.objects.get(id=product_id)
+    Cart(user=user, product=product).save()
+    return redirect("/cart")
+
+
+def show_cart(request):
+    user = request.user
+    cart= Cart.objects.filter(user=user)
+    return render(request, 'app/addtocart.html',locals())
+
+
