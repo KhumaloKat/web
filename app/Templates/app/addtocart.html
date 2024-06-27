@@ -6,7 +6,7 @@
 <div class="container my-5">
     <div class="row">
     {% if cart %}
-    <h1 class="text-center mb-5">Shopping cart</h1>
+    <h1 class="text-center mb-5" style="font-family: 'Times New Roman', Times, serif;">Shopping cart</h1>
     <div class="col-sm-6" >
         <div class="card">
             <div class="card-body" >
@@ -26,7 +26,7 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <a href="#" class="remove-cart btn btn-sm btn-dark mr-3" pid={{item.product.id}}>Remove Item</a>
-                            <p class="mb-0"><span><strong>R{{item.productd.discount_price}}</strong></span></p>
+                            <p class="mb-0"><span><strong>R{{item.product.discount_price}}</strong></span></p>
                         </div>
                     </div>
                 </div>
@@ -41,15 +41,16 @@
         <div class="card-body">
             <h3>The total Amount of</h3>
             <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center px-0">Amount<span id="amount">R{{amount}}</span></li>
             <li class="list-group-item d-flex justify-content-between align-items-center px-0">Shipping<span>R150.00</span></li>
-            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+            <li class="list-group-item d-flex justify-content-between align-items-center px-0 mb3">
                 <div>
                     <strong>Total</strong> <small>{include VAT}</small>
                 </div>
                 <span id="totalamount"><strong>R{{totalamount}}</strong></span>
             </li>
         </ul>
-        <div class="d-grid"><a href="#" class="btn btn-success">Place Order</a></div>
+        <div class="d-grid"><a href="{% url 'checkout' %}" class="btn btn-success">Place Order</a></div>
         </div>
     </div>
 </div>

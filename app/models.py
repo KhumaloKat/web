@@ -18,6 +18,16 @@ CATEGORY_CHOICES =(
     ('KD','Kid'),
 
 )
+
+STATUS_CHOICES =(
+    ('Accepted','Accepted'),
+    ('Packed','Packed'),
+    ('On the way','On the way'),
+    ('Delivered','Delivered'),
+    ('Cancel','Cancel'),
+    ('Pending','Pending'),
+
+)
 # Create your models here.
 class Product(models.Model):
     title = models.CharField(max_length=100)
@@ -45,6 +55,19 @@ class Cart(models.Model):
     product = models.ForeignKey(Product,on_delete = models.CASCADE)
     quantity = models.PositiveIntegerField(default = 1)
 
-    # @property
-    # def total_cost(self):
-    #     return self.quantity * self.product.discount_price
+    @property
+    def total_cost(self):
+        return self.quantity * self.product.discount_price
+
+class Order(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    Customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,on_delete = models.CASCADE)
+    quantity = models.PositiveIntegerField(default = 1)
+    ordered_date = models.DateTimeField(auto_now_add = True)
+    status = models.CharField(max_length=50,choices=STATUS_CHOICES,default='Pending')
+    @property
+    def total_cost(self):
+        return self.quantity * self.product.discount_price
+
+

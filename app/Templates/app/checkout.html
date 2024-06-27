@@ -1,0 +1,115 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock title %}
+
+{% block main-content %}
+<div class="container mb-5">
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-danger" role="alert"> {{msg}}</div>
+        {% endfor%}
+    {% endif %}
+    <div class="row mt-5">
+        <div class="col-sm-6" >
+            <h4 class=" mb-3" >Order Summary</h4>
+            <hr> 
+                {% for item in cart %}
+                <div class="card mb-2" >
+                    <div class="card-body" >
+                
+                        <h5>Product : {{item.product.title}}</h5>
+                        <p >Quantity : {{item.quantity}}</p>
+                        <p class="fw-bold"> Price : R{{item.product.discount_price}}</p>
+                        
+                    </div>
+                </div>
+           
+                {% endfor %}
+                <p class="fw-bold">Cost + R150 = R{{totalamount}}</p>
+            </div>
+                <div class="col-sm-4 offset-sm-1" >
+                    <h3 class=" mb-3">Select Shipping Address</h3>
+                    <hr>
+                    <form method="post" id="myform" >
+                        {% csrf_token %} 
+                        {% for ad in add %}
+                        <div class="card" >
+                            <div class="card-body">
+                                <h5>{{ad.name}}</h5>
+                                <p>Mobile : {{ad.mobile}}</p>
+                                <p>{{ad.province}} {{ad.city}}.{{ad.zipcode}}</p>
+                            </div>
+                        </div>
+                        <div class="form-check mt-2 mb-3">
+                            <input class="form-check-input" type="radio" name="custid" id="custadd{{forloop.counter}}" value="{{ad.id}}">
+                            <label class="form-check-label" for="custadd{{forloop.counter}}" > Address : {{forloop.counter}}</label>
+                        </div>
+                        {% endfor %}
+                        <div class="form-check mb-3">
+                            <label for="totalamount" class="form-label" > Total Amount</label>
+                            <input type="number" name="totalamount"  value="{{totalamount}}" readonly>
+                        </div>
+                        <div class="text-end">
+                            <!-- <button type="submit" class="btn btn-success mt-3 px-5 fw-bold">Continue</button> -->
+                            <!-- <div id="paypal-button-container"></div>-->
+                            <!-- <button id="rap-button1" type="submit" class="btn btn-success mt-3 px-5 fw-bold" >Payment</button> -->
+                            <!-- PAYPAL BUTTONS HERE  -->
+                            <div id="paypal-button-container"></div>
+
+                            <script src="https://www.paypal.com/sdk/js?client-id=AS92kQs0EKPu8LvLqnBGZ3fzS5ov3_RUlQAhvujdutZ9579Nj-oTepDHigVs0PU820JL2AtBH3Y5V6NJ&currency=USD"></script>
+                            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+                        <script>
+                            // Render the PayPal button into #paypal-button-container
+                            paypal.Buttons({
+                                // Set up the transaction
+                                createOrder: function (data, actions) {
+                                    return actions.order.create({
+                                        purchase_units: [{
+                                            amount: {
+                                                value: '{{totalamount}}'
+                                            }
+                                        }]
+                                    });
+                                },
+
+                                // Finalize the transaction
+                                onApprove: function (data, actions) {
+                                    return actions.order.capture().then(function (details) {
+                                        // Show a success message to the buyer
+                                        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+
+                                        // Send AJAX request to create the order
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "{% url 'create_order' %}",
+                                            data: {
+                                                'orderID': data.orderID,
+                                                'details': JSON.stringify(details),
+                                                'custid': $('input[name="custid"]:checked').val(),
+                                                'totalamount': $('input[name="totalamount"]').val(),
+                                                'csrfmiddlewaretoken': '{{ csrf_token }}'
+                                            },
+                                            success: function(response) {
+                                                // Handle the response from the server
+                                                alert('Order created successfully!');
+                                                window.location.href = "/order-success/";  // Redirect to a success page
+                                            },
+                                            error: function(error) {
+                                                // Handle errors
+                                                alert('There was an error creating the order. Please try again.');
+                                            }
+                                        });
+                                    });
+                                }
+                            }).render('#paypal-button-container');
+                        </script>
+
+                        </div>
+                    </form>
+                </div>
+    </div>
+</div>
+{% endblock main-content%}
+    
+   

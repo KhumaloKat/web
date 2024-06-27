@@ -20,15 +20,23 @@ urlpatterns = [
     #cart
     path("add-to-cart/", views.add_to_cart, name='add-to-cart'),
     path("cart/", views.show_cart, name='showcart'),
-    path("checkout/", views.show_cart, name='checkout'),
+    path("checkout/", views.checkout.as_view(), name='checkout'),
+    path('create-order/', views.create_order, name='create_order'),
 
-
+    
     # login authentication
     path('registration/', views.CustomerRegistrationView.as_view(), name='customerregistration'),
     path('account/login/', auth_views.LoginView.as_view(template_name='app/login.html', authentication_form=LoginForm), name='login'),
     path('passwordchange/', auth_views.PasswordChangeView.as_view(template_name='app/changepassword.html', form_class=MyPasswordChangeForm, success_url='/passwordchangedone'), name='passwordchange'),
     path('passwordchangedone/', auth_views.PasswordChangeDoneView.as_view(template_name='app/passwordchangedone.html'), name='passwordchangedone'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('order-success/', views.ordersuccess, name='order-success'),
+
+
+    #Js functions
+    path('pluscart/', views.plus_cart),
+    path('minuscart/', views.minus_cart),
+    path('removecart/', views.remove_cart),
 
     # password reset
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='app/password_reset.html', form_class=MyPasswordResetForm), name='password_reset'),
