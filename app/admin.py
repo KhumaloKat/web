@@ -15,5 +15,7 @@ class CartModelAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'quantity', 'product']
 
 @admin.register(Order)
-class Payment(admin.ModelAdmin):
-    list_display = ['id', 'user', 'Customer', 'product', 'quantity', 'ordered_date', 'status']
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'Customer', 'product', 'quantity', 'status', 'ordered_date')
+    list_filter = ('status', 'ordered_date')
+    search_fields = ('user__username', 'Customer__name', 'product__title')

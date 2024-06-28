@@ -1,0 +1,30 @@
+<!-- order_list.html -->
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}My Orders{% endblock title %}
+
+{% block main-content %}
+<div class="container mb-5">
+    <h3 class="mb-3">My Orders</h3>
+    <hr>
+    {% for order in orders %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>Order ID: {{ order.id }}</h5>
+            <p>Product: {{ order.product.title }}</p>
+            <p>Quantity: {{ order.quantity }}</p>
+            <p>Total Amount: R{{ order.total_cost }}</p>
+            <p>Status: {{ order.status }}</p>
+            <p>Placed on: {{ order.ordered_date }}</p>
+            {% if request.user.is_superuser %}
+            <p>
+                <a href="{% url 'update_order_status' order.id 'Accepted' %}" class="btn btn-sm btn-success">{{ order.status }}</a>
+                
+            </p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock main-content %}

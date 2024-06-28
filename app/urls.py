@@ -31,6 +31,10 @@ urlpatterns = [
     path('passwordchangedone/', auth_views.PasswordChangeDoneView.as_view(template_name='app/passwordchangedone.html'), name='passwordchangedone'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('order-success/', views.ordersuccess, name='order-success'),
+     path('orders/', views.order_list, name='order_list'),
+    path('update-order-status/<int:order_id>/<str:status>/', views.update_order_status, name='update_order_status'),
+
+
 
 
     #Js functions

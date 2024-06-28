@@ -9,6 +9,8 @@ from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import json
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 # Create your views here.
@@ -143,7 +145,20 @@ class checkout(View):
         return render(request, 'app/checkout.html',locals())
 
 def ordersuccess(request):
-    return render(request, 'app/payment_success.html')     
+    return render(request, 'app/payment_success.html')   
+
+
+def order_list(request):
+    orders = Order.objects.filter(user=request.user)
+    return render(request, 'app/orders.html', {'orders': orders})
+
+@user_passes_test(lambda u: u.is_superuser)
+def update_order_status(request, order_id, status):
+    order = get_object_or_404(Order, id=order_id)
+    order.status = status
+    order.save()
+    messages.success(request, 'Order status updated successfully!')
+    return redirect('order_list')
 
 def plus_cart(request):
     if request.method == 'GET':
